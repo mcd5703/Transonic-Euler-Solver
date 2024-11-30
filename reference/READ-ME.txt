@@ -1,0 +1,5 @@
+
+To run:
+
+Open the solver.m file
+Choose a desired Mach number and run.
