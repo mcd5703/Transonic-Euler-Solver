@@ -368,7 +368,7 @@ void Solver(int NACA, double Minf, double alpha, double gamInf,
             cout << "Iter " << it << ": resid = " << rhoresid << ", cl = " << cl << ", cd = " << cd << endl;
 
             ax->clear();
-            ax->contourf(x, y, Mplot, 21);
+            auto h = ax->contourf(x, y, Mplot,100)->line_width(0.000001);
             std::vector<double> xAirfoil, yAirfoil;
             // surface: j=0
             for (int k=0; k<NK; k++){
