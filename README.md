@@ -154,11 +154,8 @@ set(GL_STATIC_LIBRARIES "${CMAKE_SOURCE_DIR}/lib/glew32sd.lib;${CMAKE_SOURCE_DIR
 target_link_libraries(main ${OPENGL_gl_LIBRARY} ${GL_STATIC_LIBRARIES})
 ```
 
-# Additional tips / system requirements suggestions for MacOS
+## Extended System Requirements Guide for Troubleshooting on MacOS
 
-## System Requirements Guide for Troubleshooting
-
-### For MacOS
 If you are on MacOS, you **MUST** update your Mac and Xcode to the latest version, via Settings > Software Update and Apple Store > Xcode respectively. 
 Only then will you be able to successfully follow the steps below.
 
