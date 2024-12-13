@@ -64,6 +64,7 @@ void visualizeGrid(const vector<vector<double>> &x,
     cout << endl;
 }
 
+// Look at eigen library
 void Solver(int NACA, double Minf, double alpha, double gamInf,
             int itmax, double CFL, int nDisp, int NJ, int NK, double R2)
 {
