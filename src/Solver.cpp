@@ -369,6 +369,14 @@ void Solver(int NACA, double Minf, double alpha, double gamInf,
 
             ax->clear();
             ax->contourf(x, y, Mplot, 21);
+            std::vector<double> xAirfoil, yAirfoil;
+            // surface: j=0
+            for (int k=0; k<NK; k++){
+                xAirfoil.push_back(x[0][k]);
+                yAirfoil.push_back(y[0][k]);
+            }
+            // Fill the airfoil in
+            ax->fill(xAirfoil,yAirfoil,"k");
             ax->xlim({-1,2});
             ax->ylim({-1,1});
             f->draw();
