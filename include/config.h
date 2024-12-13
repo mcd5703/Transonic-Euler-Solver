@@ -8,7 +8,7 @@ namespace config
     extern double DEFAULT_ALPHA;
     extern double DEFAULT_GAMINF;
     extern int DEFAULT_ITMAX;
-    extern int DEFAULT_CFL;
+    extern double DEFAULT_CFL;
     extern int DEFAULT_NDISP;
     extern int DEFAULT_GRID_NJ;
     extern int DEFAULT_GRID_NK;

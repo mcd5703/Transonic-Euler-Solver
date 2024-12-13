@@ -3,10 +3,17 @@
 #include <fstream>
 #include <map>
 
-int config::TIME_GRABBING_TOOL = 100;
-int config::TIME_LANDING_PROCESS = 100;
-int config::TIME_USING_TOOL = 100;
-std::string config::DATA_FILE = "data.csv";
+// Default input values
+int DEFAULT_NACA        = 2412; // NACA Configuraton
+double DEFAULT_MINF     = 0.82; // Freestream Mach number
+double DEFAULT_ALPHA    = 0.0;  // Angle of attack
+double DEFAULT_GAMINF   = 1.4;  // Isentropic Compression Ratio
+int DEFAULT_ITMAX       = 3000; // Max iterations
+double DEFAULT_CFL      = 50.0; // CFL Number
+int DEFAULT_NDISP       = 25;   // Dispute every __ frames
+int DEFAULT_GRID_NJ     = 41;   // Grid NJ
+int DEFAULT_GRID_NK     = 81;   // Grid NK
+int DEFAULT_GRID_R2     = 100;  // Grid R2
 
 void config::parseConfigFile(std::string fqp)
 {
@@ -26,8 +33,15 @@ void config::parseConfigFile(std::string fqp)
     for (auto const &[key, value] : config)
         std::cout << key << "\t" << value << std::endl;
 
-    TIME_LANDING_PROCESS = config.count("TIME_LANDING_PROCESS") ? std::stoi(config.at("TIME_LANDING_PROCESS")) : TIME_LANDING_PROCESS;
-    TIME_GRABBING_TOOL = config.count("TIME_GRABBING_TOOL") ? std::stoi(config.at("TIME_GRABBING_TOOL")) : TIME_GRABBING_TOOL;
-    TIME_USING_TOOL = config.count("TIME_USING_TOOL") ? std::stoi(config.at("TIME_USING_TOOL")) : TIME_USING_TOOL;
-    DATA_FILE = config.count("DATA_FILE") ? config.at("DATA_FILE") : DATA_FILE;
+    DEFAULT_NACA = config.count("DEFAULT_NACA") ? std::stoi(config.at("DEFAULT_NACA")) : DEFAULT_NACA;
+    DEFAULT_MINF = config.count("DEFAULT_MINF") ? std::stoi(config.at("DEFAULT_MINF")) : DEFAULT_MINF;
+    DEFAULT_ALPHA = config.count("DEFAULT_ALPHA") ? std::stoi(config.at("DEFAULT_ALPHA")) : DEFAULT_ALPHA;
+    DEFAULT_GAMINF = config.count("DEFAULT_GAMINF") ? std::stoi(config.at("DEFAULT_GAMINF")) : DEFAULT_GAMINF;
+    DEFAULT_ITMAX = config.count("DEFAULT_ITMAX") ? std::stoi(config.at("DEFAULT_ITMAX")) : DEFAULT_ITMAX;
+    DEFAULT_CFL = config.count("DEFAULT_CFL") ? std::stoi(config.at("DEFAULT_CFL")) : DEFAULT_CFL;
+    DEFAULT_NDISP = config.count("DEFAULT_NDISP") ? std::stoi(config.at("DEFAULT_NDISP")) : DEFAULT_NDISP;
+
+    DEFAULT_GRID_NJ = config.count("DEFAULT_GRID_NJ") ? std::stoi(config.at("DEFAULT_GRID_NJ")) : DEFAULT_GRID_NJ;
+    DEFAULT_GRID_NK = config.count("DEFAULT_GRID_NK") ? std::stoi(config.at("DEFAULT_GRID_NK")) : DEFAULT_GRID_NK;
+    DEFAULT_GRID_R2 = config.count("DEFAULT_GRID_R2") ? std::stoi(config.at("DEFAULT_GRID_R2")) : DEFAULT_GRID_R2;
 };
