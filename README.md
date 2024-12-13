@@ -76,6 +76,7 @@ After you build the whole program, you will get several directories.
 ```console
 |--- build       <- where the build files and executables are stored
 |--- include     <- header files
+|--- resources   <- config and other files for architecture
 |--- src         <- main source files
 |--- main        <- test code that has a `main` function -- one at a time for `add_executable`
 |--- results     <- a folder to contain figures and stderr/stdout
