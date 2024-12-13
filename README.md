@@ -1,3 +1,10 @@
+---
+title: Transonic Euler Solver in C++
+author: Melik Demirel & Nicholas Sernberger
+email: mcd5703@psu.edu, nms6249@psu.edu
+date: 12/12/24
+---
+
 # Transonic Euler Solver in C++
 
 This repository contains all files for the Transonic Euler Solver in C++. 
@@ -12,12 +19,7 @@ Capabilities are offered but not test for:
 - RHEL8 using hte ROAR cluster
 - When we use `git` console in Windows or terminal in Linux.
 
----
-title: Transonic Euler Solver in C++
-author: Melik Demirel & Nicholas Sernberger
-email: mcd5703@psu.edu, nms6249@psu.edu
-date: 12/12/24
----
+
 
 ## Dependencies
 
