@@ -89,6 +89,7 @@ include(GNUInstallDirs)
 include_directories(
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/src
+    ${PROJECT_SOURCE_DIR}/resources
 )
 
 file(GLOB all_SRCS
@@ -96,6 +97,12 @@ file(GLOB all_SRCS
     "${PROJECT_SOURCE_DIR}/include/*.hpp"
     "${PROJECT_SOURCE_DIR}/src/*.cpp"
     "${PROJECT_SOURCE_DIR}/src/*.c"
+
+    # Seperate config folder for non-simulation related resources
+    "${PROJECT_SOURCE_DIR}/resources/*.c"
+    "${PROJECT_SOURCE_DIR}/resources/*.cpp"
+    "${PROJECT_SOURCE_DIR}/resources/*.hpp"
+    "${PROJECT_SOURCE_DIR}/resources/*.h"
 )
 # Create a binary file. 
 # The first argument is the name of the binary file.

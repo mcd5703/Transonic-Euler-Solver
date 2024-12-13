@@ -12,6 +12,8 @@
 #else
 	#include <unistd.h>
 #endif
+// Include the solver header
+#include "solver.hpp"
 
 // Provided by Dr. Simon Miller
 void parseArgs(int argc, char **argv)
@@ -42,20 +44,19 @@ int main(int argc, char *argv[])
 {
 	parseArgs(argc, argv);
 
-    // Output the values for each variable in "config.h"
-	std::cout << "-----------------------------------------------------------" << std::endl;
-	std::cout << "NOTICE: The following defaults were read through config.inp... " << std::endl;
-    std::cout << "DEFAULT_NACA: " << config::DEFAULT_NACA << std::endl;
-    std::cout << "DEFAULT_MINF: " << config::DEFAULT_MINF << std::endl;
-    std::cout << "DEFAULT_ALPHA: " << config::DEFAULT_ALPHA << std::endl;
-    std::cout << "DEFAULT_GAMINF: " << config::DEFAULT_GAMINF << std::endl;
-    std::cout << "DEFAULT_ITMAX: " << config::DEFAULT_ITMAX << std::endl;
-    std::cout << "DEFAULT_CFL: " << config::DEFAULT_CFL << std::endl;
-    std::cout << "DEFAULT_NDISP: " << config::DEFAULT_NDISP << std::endl;
-    std::cout << "DEFAULT_GRID_NJ: " << config::DEFAULT_GRID_NJ << std::endl;
-    std::cout << "DEFAULT_GRID_NK: " << config::DEFAULT_GRID_NK << std::endl;
-    std::cout << "DEFAULT_GRID_R2: " << config::DEFAULT_GRID_R2 << std::endl;
-	std::cout << "-----------------------------------------------------------" << std::endl;
+    int NACA = config::DEFAULT_NACA;
+    double Minf = config::DEFAULT_MINF;
+    double alpha = config::DEFAULT_ALPHA;
+    double gamInf = config::DEFAULT_GAMINF;
+    int itmax = config::DEFAULT_ITMAX;
+    double CFL = config::DEFAULT_CFL;
+    int nDisp = config::DEFAULT_NDISP;
+    int NJ = config::DEFAULT_GRID_NJ;
+    int NK = config::DEFAULT_GRID_NK;
+    double R2 = config::DEFAULT_GRID_R2;
+
+
+    Solver(NACA, Minf, alpha, gamInf, itmax, CFL, nDisp, NJ, NK, R2);
 
 	return 0;
 }
