@@ -63,7 +63,7 @@ PROJECT_BRIEF          = "Solve the Euler Equations in 2D for flow around a 2D a
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           = "img/Example.png"
+PROJECT_LOGO           = "img/Icon.jpg"
 
 # With the PROJECT_ICON tag one can specify an icon that is included in the tabs
 # when the HTML document is shown. Doxygen will copy the logo to the output
