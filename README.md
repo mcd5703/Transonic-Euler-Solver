@@ -15,11 +15,9 @@ Credits: Dr. Simon Miller and Dr. James Coder.
 
 This project has primarily been tested on MacOS with `cmake`.
 
-Capabilities are offered but not test for:
+Capabilities are offered but not tested for:
 - RHEL8 using hte ROAR cluster
 - When we use `git` console in Windows or terminal in Linux.
-
-
 
 ## Dependencies
 
