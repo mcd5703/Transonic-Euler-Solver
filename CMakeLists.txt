@@ -1,8 +1,11 @@
-cmake_minimum_required(VERSION 3.22) # Specify CMake version.
-project(homework02
-    DESCRIPTION "homework 02 solution set"
-    VERSION 0.0.1) # A project name. This can be anything.
-set(CMAKE_CXX_STANDARD 17) # Specify C++ version.
+# Author: Melik Demirel & Nick Sernberger
+# Credits: Dr. Simon Miller (Reused from AERSP 424 Homework 2)
+
+cmake_minimum_required(VERSION 3.22)                    # Specify CMake version.
+project(TransonicEulerSolver
+    DESCRIPTION "Transonic Euler Solver in C++"
+    VERSION 0.0.1)                                      # A project name. This can be anything.
+set(CMAKE_CXX_STANDARD 17)                              # Specify C++ version.
 if(MSVC)
     message(NOTICE "Using the MSCV options")
 
@@ -118,8 +121,6 @@ else()
     target_link_libraries(main ${CMAKE_DL_LIBS})
     # target_link_libraries(main -fsanitize=undefined)
 endif()
-
-
 
 if(GLEW_FOUND)
     target_link_libraries(main GLEW::glew) # fix for MacOS / linux

@@ -6,7 +6,14 @@ project_root_dir=$current_directory
 
 # if on MacOS, you will need to install cmake, python, numpy, xcode-tools, gnuplot, glew
 
-echo "Hello Friend! Let's try and build this application together :D"
+# Author: Dr. Simon Miller (Reused from AERSP 424 Homework 2)
+
+echo "***************************************************"
+echo "---------------------------------------------------"
+echo "Building Transonic Euler Solver in C++ for CLANG..."
+echo "---------------------------------------------------"
+echo "***************************************************"
+
 
 mkdir -p ${project_root_dir}/third_party
 cd ${project_root_dir}/third_party
@@ -76,8 +83,7 @@ echo "running the executable with some default parameters"
 echo "./build/main -c config.inp > results.txt 2>&1"
 echo "  the 2>&1 redirects the stderr to a 1 so we don't see the gnuplot problems"
 mkdir -p ${project_root_dir}/results
-#./build/main -c config.inp > results/results.txt 2>&1
-./build/main
+./build/main -c config.inp > results/results.txt 2>&1
 
 # build the documentation
 doxygen DOXYFILE

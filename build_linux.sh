@@ -2,12 +2,19 @@
 current_directory="$(cd "$(dirname "$0")" && pwd)"
 project_root_dir=$current_directory
 
+# Author: Dr. Simon Miller (Reused from AERSP 424 Homework 2)
+
 # if on ICDS ROAR you will need to load modules to make this work
 module load cmake
 module load gcc/9.1.0
 module load gnuplot
 
-echo "Hello Friend! Let's try and build this application together :D"
+echo "***************************************************"
+echo "---------------------------------------------------"
+echo "Building Transonic Euler Solver in C++ for LINUX..."
+echo "---------------------------------------------------"
+echo "***************************************************"
+
 
 mkdir -p ${project_root_dir}/third_party
 cd ${project_root_dir}/third_party
@@ -76,8 +83,7 @@ echo "running the executable with some default parameters"
 echo "./build/main -c config.inp > results.txt 2>&1"
 echo "  the 2>&1 redirects the stderr to a 1 so we don't see the gnuplot problems"
 mkdir -p ${project_root_dir}/results
-#./build/main -c config.inp > results/results.txt 2>&1
-./build/main
+./build/main -c config.inp > results/results.txt 2>&1
 
 # build the documentation
 doxygen DOXYFILE

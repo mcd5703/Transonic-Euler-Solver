@@ -2,6 +2,8 @@
 current_directory="$(cd "$(dirname "$0")" && pwd)"
 project_root_dir=$current_directory
 
+# Author: Dr. Simon Miller (Reused from AERSP 424 Homework 2)
+
 # if on Windows and using MSYS UCRT, might need a couple of tools
 # https://code.visualstudio.com/docs/cpp/config-mingw
 # pacman -S cmake
@@ -13,7 +15,12 @@ project_root_dir=$current_directory
 # pacman -S mingw-w64-ucrt-x86_64-vtk
 # pacman -S mingw-w64-ucrt-x86_64-gnuplot
 
-echo "Hello Friend! Let's try and build this application together :D"
+
+echo "*****************************************************"
+echo "-----------------------------------------------------"
+echo "Building Transonic Euler Solver in C++ for WINDOWS..."
+echo "-----------------------------------------------------"
+echo "*****************************************************"
 
 mkdir -p ${project_root_dir}/third_party
 cd ${project_root_dir}/third_party
