@@ -80,6 +80,8 @@ After you build the whole program, you will get several directories.
 |--- main        <- test code that has a `main` function -- one at a time for `add_executable`
 |--- results     <- a folder to contain figures and stderr/stdout
 |--- third_party <- to include third_party dependencies and build/install the these dependencies
+|--- docs        <- documentation folder (open in html)
+|--- img         <- documentation image icon
 ```
 
 ## How to Build
