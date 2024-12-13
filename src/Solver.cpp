@@ -9,8 +9,10 @@
 #include <vector>
 #include <matplot/matplot.h>
 
-void visualizeGrid(const std::vector<std::vector<double>> &x,
-                    const std::vector<std::vector<double>> &y,
+using namespace std;
+
+void visualizeGrid(const vector<vector<double>> &x,
+                    const vector<vector<double>> &y,
                     int NJ, int NK)
 {
     using namespace matplot;
@@ -32,7 +34,7 @@ void visualizeGrid(const std::vector<std::vector<double>> &x,
 
     // Plot lines in J direction (constant j)
     for (int j=0;j<NJ;j++){
-        std::vector<double> xv, yv;
+        vector<double> xv, yv;
         xv.reserve(NK);
         yv.reserve(NK);
         for (int k=0;k<NK;k++){
@@ -44,7 +46,7 @@ void visualizeGrid(const std::vector<std::vector<double>> &x,
 
     // Plot lines in K direction (constant k)
     for (int k=0;k<NK;k++){
-        std::vector<double> xv, yv;
+        vector<double> xv, yv;
         xv.reserve(NJ);
         yv.reserve(NJ);
         for (int j=0;j<NJ;j++){
@@ -59,51 +61,52 @@ void visualizeGrid(const std::vector<std::vector<double>> &x,
     ax->ylim({-1,1});
 
     show();
+    cout << endl;
 }
 
 void Solver(int NACA, double Minf, double alpha, double gamInf,
             int itmax, double CFL, int nDisp, int NJ, int NK, double R2)
 {
 
-    std::cout << "-----------------------------------------------------------" << std::endl;
-    std::cout << "NOTICE: The following defaults were read through main... " << std::endl;
-    std::cout << "DEFAULT_NACA: " << NACA << std::endl;
-    std::cout << "DEFAULT_MINF: " << Minf << std::endl;
-    std::cout << "DEFAULT_ALPHA: " << alpha << std::endl;
-    std::cout << "DEFAULT_GAMINF: " << gamInf << std::endl;
-    std::cout << "DEFAULT_ITMAX: " << itmax << std::endl;
-    std::cout << "DEFAULT_CFL: " << CFL << std::endl;
-    std::cout << "DEFAULT_NDISP: " << nDisp << std::endl;
-    std::cout << "DEFAULT_GRID_NJ: " << NJ << std::endl;
-    std::cout << "DEFAULT_GRID_NK: " << NK << std::endl;
-    std::cout << "DEFAULT_GRID_R2: " << R2 << std::endl;
-    std::cout << "-----------------------------------------------------------" << std::endl;
+    cout << "-----------------------------------------------------------" << endl;
+    cout << "NOTICE: The following defaults were read through main... " << endl;
+    cout << "DEFAULT_NACA: " << NACA << endl;
+    cout << "DEFAULT_MINF: " << Minf << endl;
+    cout << "DEFAULT_ALPHA: " << alpha << endl;
+    cout << "DEFAULT_GAMINF: " << gamInf << endl;
+    cout << "DEFAULT_ITMAX: " << itmax << endl;
+    cout << "DEFAULT_CFL: " << CFL << endl;
+    cout << "DEFAULT_NDISP: " << nDisp << endl;
+    cout << "DEFAULT_GRID_NJ: " << NJ << endl;
+    cout << "DEFAULT_GRID_NK: " << NK << endl;
+    cout << "DEFAULT_GRID_R2: " << R2 << endl;
+    cout << "-----------------------------------------------------------" << endl;
 
     // Generate the grid
-    std::vector<std::vector<double>> x(NJ, std::vector<double>(NK,0.0));
-    std::vector<std::vector<double>> y(NJ, std::vector<double>(NK,0.0));
+    vector<vector<double>> x(NJ, vector<double>(NK,0.0));
+    vector<vector<double>> y(NJ, vector<double>(NK,0.0));
     makegrid(NACA,R2,NJ,NK,x,y);
 
     // Visualize the grid before proceeding
     visualizeGrid(x,y,NJ,NK);
 
     // Compute metrics
-    std::vector<std::vector<double>> xx(NJ, std::vector<double>(NK,0.0));
-    std::vector<std::vector<double>> xy(NJ, std::vector<double>(NK,0.0));
-    std::vector<std::vector<double>> yx(NJ, std::vector<double>(NK,0.0));
-    std::vector<std::vector<double>> yy(NJ, std::vector<double>(NK,0.0));
-    std::vector<std::vector<double>> vol(NJ, std::vector<double>(NK,0.0));
+    vector<vector<double>> xx(NJ, vector<double>(NK,0.0));
+    vector<vector<double>> xy(NJ, vector<double>(NK,0.0));
+    vector<vector<double>> yx(NJ, vector<double>(NK,0.0));
+    vector<vector<double>> yy(NJ, vector<double>(NK,0.0));
+    vector<vector<double>> vol(NJ, vector<double>(NK,0.0));
     metrics(x,y,NJ,NK,xx,xy,yx,yy,vol);
 
     // Initialize solution to free stream
     double rhoInf = 1.0; // Density Normalized to 1
-    double uInf = Minf * std::cos(alpha * M_PI/180.0); 
-    double vInf = Minf * std::sin(alpha * M_PI/180.0);
+    double uInf = Minf * cos(alpha * M_PI/180.0); 
+    double vInf = Minf * sin(alpha * M_PI/180.0);
     double TInf = 1.0/gamInf; // Temperature normalized by gamma
-    std::vector<double> qInfPrim = {rhoInf, uInf, vInf, TInf, gamInf};
+    vector<double> qInfPrim = {rhoInf, uInf, vInf, TInf, gamInf};
 
-    std::vector<std::vector<std::vector<double>>> q(NJ,
-        std::vector<std::vector<double>>(NK,std::vector<double>(4,0.0)));
+    vector<vector<vector<double>>> q(NJ,
+        vector<vector<double>>(NK,vector<double>(4,0.0)));
 
     for (int j = 0; j < NJ; j++) {
         for (int k = 0; k < NK; k++) {
@@ -114,19 +117,19 @@ void Solver(int NACA, double Minf, double alpha, double gamInf,
         }
     }
 
-    std::vector<std::vector<std::vector<double>>> qn = q;
-    std::vector<std::vector<std::vector<double>>> R(NJ,std::vector<std::vector<double>>(NK,std::vector<double>(4,0.0)));
-    std::vector<std::vector<double>> dt(NJ,std::vector<double>(NK,0.0));
+    vector<vector<vector<double>>> qn = q;
+    vector<vector<vector<double>>> R(NJ,vector<vector<double>>(NK,vector<double>(4,0.0)));
+    vector<vector<double>> dt(NJ,vector<double>(NK,0.0));
 
     // We'll need v1, v2 arrays same dimension as q:
-    std::vector<std::vector<std::vector<double>>> v1(NJ,std::vector<std::vector<double>>(NK,std::vector<double>(4,0.0)));
-    std::vector<std::vector<std::vector<double>>> v2(NJ,std::vector<std::vector<double>>(NK,std::vector<double>(4,0.0)));
-    std::vector<std::vector<std::vector<double>>> RN(NJ,std::vector<std::vector<double>>(NK,std::vector<double>(4,0.0)));
+    vector<vector<vector<double>>> v1(NJ,vector<vector<double>>(NK,vector<double>(4,0.0)));
+    vector<vector<vector<double>>> v2(NJ,vector<vector<double>>(NK,vector<double>(4,0.0)));
+    vector<vector<vector<double>>> RN(NJ,vector<vector<double>>(NK,vector<double>(4,0.0)));
 
     // Arrays for Mplot, P, Cp
-    std::vector<std::vector<double>> Mplot(NJ,std::vector<double>(NK,0.0));
-    std::vector<std::vector<double>> Pmat(NJ,std::vector<double>(NK,0.0));
-    std::vector<std::vector<double>> Cp(NJ,std::vector<double>(NK,0.0));
+    vector<vector<double>> Mplot(NJ,vector<double>(NK,0.0));
+    vector<vector<double>> Pmat(NJ,vector<double>(NK,0.0));
+    vector<vector<double>> Cp(NJ,vector<double>(NK,0.0));
 
     using namespace matplot;
     auto f = figure(true);
@@ -152,7 +155,7 @@ void Solver(int NACA, double Minf, double alpha, double gamInf,
 
         // bcwall on top boundary (j=0)
         {
-            std::vector<std::vector<std::vector<double>>> qSlice(1,std::vector<std::vector<double>>(NK,std::vector<double>(4,0.0)));
+            vector<vector<vector<double>>> qSlice(1,vector<vector<double>>(NK,vector<double>(4,0.0)));
             for (int k=0; k<NK; k++){
                 for (int n=0; n<4; n++){
                     qSlice[0][k][n] = q[0][k][n];
@@ -160,9 +163,9 @@ void Solver(int NACA, double Minf, double alpha, double gamInf,
             }
 
             // Make single-line xx,xy,vol arrays
-            std::vector<std::vector<double>> xxLine(1,std::vector<double>(NK));
-            std::vector<std::vector<double>> xyLine(1,std::vector<double>(NK));
-            std::vector<std::vector<double>> volLine(1,std::vector<double>(NK));
+            vector<vector<double>> xxLine(1,vector<double>(NK));
+            vector<vector<double>> xyLine(1,vector<double>(NK));
+            vector<vector<double>> volLine(1,vector<double>(NK));
             for (int kk=0; kk<NK; kk++){
                 xxLine[0][kk]=xx[0][kk];
                 xyLine[0][kk]=xy[0][kk];
@@ -186,16 +189,16 @@ void Solver(int NACA, double Minf, double alpha, double gamInf,
 
         // bcfree on bottom boundary (j=NJ-1)
         {
-            std::vector<std::vector<std::vector<double>>> qSliceBottom(1,std::vector<std::vector<double>> (NK,std::vector<double>(4,0.0)));
+            vector<vector<vector<double>>> qSliceBottom(1,vector<vector<double>> (NK,vector<double>(4,0.0)));
             for (int k=0;k<NK;k++){
                 for (int n=0;n<4;n++){
                     qSliceBottom[0][k][n]=q[NJ-1][k][n];
                 }
             }
 
-            std::vector<std::vector<double>> xxBottomLine(1,std::vector<double>(NK));
-            std::vector<std::vector<double>> xyBottomLine(1,std::vector<double>(NK));
-            std::vector<std::vector<double>> volBottomLine(1,std::vector<double>(NK));
+            vector<vector<double>> xxBottomLine(1,vector<double>(NK));
+            vector<vector<double>> xyBottomLine(1,vector<double>(NK));
+            vector<vector<double>> volBottomLine(1,vector<double>(NK));
 
             for (int kk = 0; kk < NK; kk++){
                 xxBottomLine[0][kk] = xx[NJ-1][kk];
@@ -218,7 +221,7 @@ void Solver(int NACA, double Minf, double alpha, double gamInf,
         RN = R;
 
         double h11 = qdotq(v1,v1,NJ,NK);
-        h11 = std::sqrt(h11);
+        h11 = sqrt(h11);
         for (int j=0;j<NJ;j++){
             for (int k=0;k<NK;k++){
                 for (int n=0;n<4;n++){
@@ -245,16 +248,16 @@ void Solver(int NACA, double Minf, double alpha, double gamInf,
 
         // bcwall top boundary again
         {
-            std::vector<std::vector<std::vector<double>>> qSlice(1,std::vector<std::vector<double>> (NK,std::vector<double>(4,0.0)));
+            vector<vector<vector<double>>> qSlice(1,vector<vector<double>> (NK,vector<double>(4,0.0)));
             for (int kk=0; kk<NK; kk++){
                 for (int n=0;n<4;n++){
                     qSlice[0][kk][n]=q[0][kk][n];
                 }
             }
 
-            std::vector<std::vector<double>> xxLine(1,std::vector<double>(NK));
-            std::vector<std::vector<double>> xyLine(1,std::vector<double>(NK));
-            std::vector<std::vector<double>> volLine(1,std::vector<double>(NK));
+            vector<vector<double>> xxLine(1,vector<double>(NK));
+            vector<vector<double>> xyLine(1,vector<double>(NK));
+            vector<vector<double>> volLine(1,vector<double>(NK));
             for (int kk=0; kk<NK; kk++){
                 xxLine[0][kk]=xx[0][kk];
                 xyLine[0][kk]=xy[0][kk];
@@ -278,16 +281,16 @@ void Solver(int NACA, double Minf, double alpha, double gamInf,
 
         // bcfree bottom boundary again
         {
-            std::vector<std::vector<std::vector<double>>> qSliceBottom(1,std::vector<std::vector<double>> (NK,std::vector<double>(4,0.0)));
+            vector<vector<vector<double>>> qSliceBottom(1,vector<vector<double>> (NK,vector<double>(4,0.0)));
             for (int k=0;k<NK;k++){
                 for (int n=0;n<4;n++){
                     qSliceBottom[0][k][n]=q[NJ-1][k][n];
                 }
             }
 
-            std::vector<std::vector<double>> xxBottomLine(1,std::vector<double>(NK));
-            std::vector<std::vector<double>> xyBottomLine(1,std::vector<double>(NK));
-            std::vector<std::vector<double>> volBottomLine(1,std::vector<double>(NK));
+            vector<vector<double>> xxBottomLine(1,vector<double>(NK));
+            vector<vector<double>> xyBottomLine(1,vector<double>(NK));
+            vector<vector<double>> volBottomLine(1,vector<double>(NK));
             for (int kk=0; kk<NK; kk++){
                 xxBottomLine[0][kk]=xx[NJ-1][kk];
                 xyBottomLine[0][kk]=xy[NJ-1][kk];
@@ -333,7 +336,7 @@ void Solver(int NACA, double Minf, double alpha, double gamInf,
                     count++;
                 }
             }
-            double rhoresid = std::sqrt(sumsq)/CFL;
+            double rhoresid = sqrt(sumsq)/CFL;
 
             for (int j=0;j<NJ;j++){
                 for (int k=0;k<NK;k++){
@@ -345,7 +348,7 @@ void Solver(int NACA, double Minf, double alpha, double gamInf,
                     double v=rhov/rho;
                     double p=(gamInf-1.0)*(rhoE -0.5*(rhou*rhou+rhov*rhov)/rho);
                     double a2 = gamInf*(gamInf-1)*(rhoE/rho -0.5*(u*u+v*v));
-                    double M = std::sqrt((u*u+v*v)/a2);
+                    double M = sqrt((u*u+v*v)/a2);
                     Mplot[j][k]=M;
                     Pmat[j][k]=p;
                     Cp[j][k]=(p -1.0/gamInf)/(0.5*Minf*Minf);
@@ -359,10 +362,10 @@ void Solver(int NACA, double Minf, double alpha, double gamInf,
                 cy -= 0.5*(Cp[JJ][K]*xy[JJ][K] + Cp[JJ][K+1]*xy[JJ][K+1]);
             }
 
-            double cl = cy*std::cos(alpha*M_PI/180.0) - cx*std::sin(alpha*M_PI/180.0);
-            double cd = cx*std::cos(alpha*M_PI/180.0) + cy*std::sin(alpha*M_PI/180.0);
+            double cl = cy*cos(alpha*M_PI/180.0) - cx*sin(alpha*M_PI/180.0);
+            double cd = cx*cos(alpha*M_PI/180.0) + cy*sin(alpha*M_PI/180.0);
 
-            std::cout << "Iter " << it << ": resid = " << rhoresid << ", cl = " << cl << ", cd = " << cd << std::endl;
+            cout << "Iter " << it << ": resid = " << rhoresid << ", cl = " << cl << ", cd = " << cd << endl;
 
             ax->clear();
             ax->contourf(x, y, Mplot, 21);

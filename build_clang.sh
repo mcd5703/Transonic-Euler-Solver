@@ -75,11 +75,12 @@ cmake --install . --config Release
 cd "${project_root_dir}"
 echo "declare success -- hooray!"
 
+
 echo "running the executable with some default parameters"
 echo "./build/main -c config.inp > results.txt 2>&1"
 echo "  the 2>&1 redirects the stderr to a 1 so we don't see the gnuplot problems"
 mkdir -p "${project_root_dir}/results"
-./build/main -c config.inp > "${project_root_dir}/results/results.txt" 2>&1
+./build/main -c config.inp 2> >(grep -v "datablock" > "${project_root_dir}/results/results.txt") > "${project_root_dir}/results/results.txt"
 
 # build the documentation
 doxygen DOXYFILE
